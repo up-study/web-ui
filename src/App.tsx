@@ -1,12 +1,12 @@
 import React from 'react'
 
-import People from 'components/People'
+import Root from 'components/Root'
 import SideBar from 'components/SideBar'
 
 export default function () {
   return (
-    <SideBar>
-      <People />
-    </SideBar>
+    <Root>
+      <SideBar />
+    </Root>
   )
 }

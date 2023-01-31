@@ -1,15 +1,35 @@
 import { useState } from 'react'
 
-import ChildrenProp from 'models/ChildrenProp'
+interface User {
+  id: number
+  email: string
+  username: string
+  image: string | null
+}
 
-export default function ({ children }: ChildrenProp) {
-  const username = 'ruslan'
-  const email = 'ruslan@kortechs.io'
-  const [open, setOpen] = useState(true)
+function getUser() {
+  /**
+   * Get the user data
+   * send request to `users/profile/`
+   *
+   * */
+  const user: User = {
+    id: 1,
+    username: 'ruslan',
+    email: 'ruslan@kortechs.io',
+    image: null, //'src/assets/logo.png',
+  }
+  return user
+}
+
+export default function () {
+  const user = getUser()
+  const defaultImage = 'https://via.placeholder.com/200x200'
+  const [open, setOpen] = useState(false)
   const Menus = [
     { title: 'Dashboard', src: 'Chart_fill' },
-    { title: 'Inbox', src: 'Chat' },
-    { title: 'Accounts', src: 'User', gap: true },
+    { title: 'Chats', src: 'Chat' },
+    { title: 'Following', src: 'User', gap: true },
     { title: 'Schedule ', src: 'Calendar' },
     { title: 'Search', src: 'Search' },
     { title: 'Analytics', src: 'Chart' },
@@ -33,18 +53,16 @@ export default function ({ children }: ChildrenProp) {
 
         <div className="flex gap-x-4 items-center">
           <img
-            src="./src/assets/logo.png"
-            className={`cursor-pointer duration-500 ${
-              open && 'rotate-[360deg] h-20'
-            }`}
+            src={user.image ? user.image : defaultImage}
+            className={`cursor-pointer rounded-avatar w-16`}
           />
           <div
             className={`text-white origin-left font-medium duration-200 ${
               !open && 'scale-0'
             }`}
           >
-            <h1 className={'font-bold'}>{username}</h1>
-            <h6 className={'font-thin'}>{email}</h6>
+            <h1 className={'font-bold'}>{user.username}</h1>
+            <h6 className={'font-thin'}>{user.email}</h6>
           </div>
         </div>
 
@@ -65,8 +83,6 @@ export default function ({ children }: ChildrenProp) {
           ))}
         </ul>
       </div>
-
-      <div className="h-screen flex-1 p-7 bg-black-300">{children}</div>
     </div>
   )
 }
