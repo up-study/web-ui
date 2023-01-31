@@ -1,10 +1,12 @@
-import MainBlock from 'components/MainBlock'
-import Root from 'components/Root'
+import React from 'react'
+
+import People from 'components/People'
+import SideBar from 'components/SideBar'
 
 export default function () {
   return (
-    <Root>
-      <MainBlock />
-    </Root>
+    <SideBar>
+      <People />
+    </SideBar>
   )
 }
